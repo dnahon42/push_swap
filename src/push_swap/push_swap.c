@@ -6,7 +6,7 @@
 /*   By: dnahon <dnahon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 12:55:52 by dnahon            #+#    #+#             */
-/*   Updated: 2025/05/16 13:25:35 by dnahon           ###   ########.fr       */
+/*   Updated: 2025/05/16 16:30:56 by dnahon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,77 +14,47 @@
 #include "../../includes/libft.h"
 #include "../../includes/push_swap.h"
 
-void	swap(int *a, int *b)
+void	ft_swap_adjacent(t_list **head)
 {
-	int	temp;
+	t_list	*first;
+	t_list	*second;
 
-	temp = *a;
-	*a = *b;
-	*b = temp;
+	if (!head || !*head || !(*head)->next)
+		return ;
+	first = *head;
+	second = first->next;
+	first->next = second->next;
+	second->next = first;
+	*head = second;
 }
 
-int	partition(int arr[], int low, int high)
+/* Print the linked list (assuming int content) */
+void	ft_print_list(t_list *head)
 {
-	int	p;
-	int	i;
-	int	j;
-
-	p = arr[low];
-	i = low;
-	j = high;
-	while (i < j)
+	while (head)
 	{
-		while (arr[i] <= p && i <= high - 1)
-		{
-			i++;
-		}
-		while (arr[j] > p && j >= low + 1)
-		{
-			j--;
-		}
-		if (i < j)
-		{
-			swap(&arr[i], &arr[j]);
-		}
+		ft_printf("%d -> ", *(int *)(head->content));
+		head = head->next;
 	}
-	swap(&arr[low], &arr[j]);
-	return (j);
+	ft_printf("NULL\n");
 }
 
-void	ft_quicksort(int arr[], int low, int high)
+/* Main function */
+int	main(void)
 {
-	int	pi;
+	t_list	*head;
 
-	if (low < high)
-	{
-		pi = partition(arr, low, high);
-		ft_quicksort(arr, low, pi - 1);
-		ft_quicksort(arr, pi + 1, high);
-	}
-}
-
-int	main(int ac, char **av)
-{
-	int	j;
-	int	arr[ac - 1];
-	int	n;
-	int	i;
-
-	i = 0;
-	j = 0;
-	while (j < ac - 1)
-	{
-		if (ft_atoll(av[1 + j]) > INT_MAX || ft_atoll(av[1 + j]) < INT_MIN)
-			return (write(2, "Error\n", 6), 0);
-		arr[j] = ft_atoi(av[1 + j]);
-		j++;
-	}
-	n = sizeof(arr) / sizeof(arr[0]);
-	ft_quicksort(arr, 0, n - 1);
-	while (i < n)
-	{
-		ft_printf("%d ", arr[i]);
-		i++;
-	}
+	int a, b, c, d, e;
+	a = 1, b = 2, c = 3, d = 4, e = 5;
+	head = ft_lstnew(&a);
+	head->next = ft_lstnew(&b);
+	head->next->next = ft_lstnew(&c);
+	head->next->next->next = ft_lstnew(&d);
+	head->next->next->next->next = ft_lstnew(&e);
+	printf("Original list:\n");
+	ft_print_list(head);
+	ft_swap_adjacent(&head);
+	printf("\nList after swapping 2 and 4:\n");
+	ft_print_list(head);
 	return (0);
 }
