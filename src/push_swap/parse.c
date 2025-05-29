@@ -62,18 +62,18 @@ int	parse_direct_arguments(int argc, char **argv, int **a)
 	return (sa);
 }
 
-int	check_duplicates(int argc, char **argv)
+int	check_duplicates(int size, char **array)
 {
 	int	i;
 	int	j;
 
-	i = 1;
-	while (i < argc)
+	i = 0;
+	while (i < size)
 	{
 		j = i + 1;
-		while (j < argc)
+		while (j < size)
 		{
-			if (ft_atoi(argv[i]) == ft_atoi(argv[j]))
+			if (ft_atoi(array[i]) == ft_atoi(array[j]))
 				return (ft_error(), -1);
 			j++;
 		}
