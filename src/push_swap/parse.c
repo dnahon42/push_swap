@@ -84,25 +84,27 @@ int	check_duplicates(int size, char **array)
 
 int	checkdup_onearg(int argc, char **argv, int **a)
 {
-	int		size;
 	char	**splitted;
+	int		size;
+	int		i;
 
-	if (argc == 2)
+	if (argc != 2)
+		return (0);
+	splitted = ft_split(argv[1], ' ');
+	if (!splitted)
+		return (-1);
+	i = 0;
+	while (splitted[i])
 	{
-		splitted = ft_split(argv[1], ' ');
-		if (!splitted)
-			return (-1);
-		size = 0;
-		while (splitted[size])
-			size++;
-		if (check_duplicates(size, splitted) == -1)
-			return (free_all(splitted, size - 1), 0);
-		free_all(splitted, size - 1);
-		if (ft_atoll(argv[1]) > INT_MAX || ft_atoll(argv[1]) < INT_MIN)
-			ft_error();
-		return (parse_split_arguments(argv[1], a));
+		if (ft_atoll(splitted[i]) > INT_MAX || ft_atoll(splitted[i]) < INT_MIN)
+			return (free_all(splitted, i), ft_error(), -1);
+		i++;
 	}
-	return (0);
+	size = i;
+	if (check_duplicates(size, splitted) == -1)
+		return (free_all(splitted, size - 1), 0);
+	free_all(splitted, size - 1);
+	return (parse_split_arguments(argv[1], a));
 }
 
 int	parse_arguments(int argc, char **argv, int **a)
