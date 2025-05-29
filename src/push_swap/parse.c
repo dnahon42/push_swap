@@ -1,0 +1,117 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dnahon <dnahon@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/23 20:30:28 by dnahon            #+#    #+#             */
+/*   Updated: 2025/05/29 16:28:04 by dnahon           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/ft_printf.h"
+#include "../../includes/libft.h"
+#include "../../includes/push_swap.h"
+
+int	parse_split_arguments(char *arg, int **a)
+{
+	char	**splitted;
+	int		count;
+	int		i;
+
+	i = 0;
+	splitted = ft_split(arg, ' ');
+	if (!splitted)
+		return (-1);
+	count = 0;
+	while (splitted[count])
+		count++;
+	*a = ft_malloc(count * sizeof(int));
+	if (!*a)
+		return (ft_free_split(splitted), ft_error(), -1);
+	while (i < count)
+	{
+		if (!is_valid_number(splitted[i]))
+			return (ft_free_split(splitted), ft_error(), -1);
+		(*a)[i] = ft_atoi(splitted[i]);
+		i++;
+	}
+	ft_free_split(splitted);
+	return (count);
+}
+
+int	parse_direct_arguments(int argc, char **argv, int **a)
+{
+	int	sa;
+	int	i;
+
+	sa = 0;
+	i = 1;
+	*a = ft_malloc((argc - 1) * sizeof(int));
+	if (!*a)
+		return (-1);
+	while (i < argc)
+	{
+		if (!is_valid_number(argv[i]))
+			return (ft_free(*a), ft_error(), -1);
+		else if (ft_atoll(argv[i]) > INT_MAX || ft_atoll(argv[i]) < INT_MIN)
+			ft_error();
+		(*a)[sa++] = ft_atoi(argv[i++]);
+	}
+	return (sa);
+}
+
+int	check_duplicates(int argc, char **argv)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	while (i < argc)
+	{
+		j = i + 1;
+		while (j < argc)
+		{
+			if (ft_atoi(argv[i]) == ft_atoi(argv[j]))
+				return (ft_error(), -1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	checkdup_onearg(int argc, char **argv, int **a)
+{
+	int		size;
+	char	**splitted;
+
+	if (argc == 2)
+	{
+		splitted = ft_split(argv[1], ' ');
+		if (!splitted)
+			return (-1);
+		size = 0;
+		while (splitted[size])
+			size++;
+		if (check_duplicates(size, splitted) == -1)
+			return (free_all(splitted, size - 1), 0);
+		free_all(splitted, size - 1);
+		if (ft_atoll(argv[1]) > INT_MAX || ft_atoll(argv[1]) < INT_MIN)
+			ft_error();
+		return (parse_split_arguments(argv[1], a));
+	}
+	return (0);
+}
+
+int	parse_arguments(int argc, char **argv, int **a)
+{
+	if (argc < 2)
+		return (0);
+	if (argc == 2)
+		return (checkdup_onearg(argc, argv, a));
+	else
+		return (check_duplicates(argc, argv), parse_direct_arguments(argc, argv,
+				a));
+}

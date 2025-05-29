@@ -1,0 +1,100 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dnahon <dnahon@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/21 11:52:56 by dnahon            #+#    #+#             */
+/*   Updated: 2025/05/29 13:32:20 by dnahon           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/ft_printf.h"
+#include "../../includes/libft.h"
+#include "../../includes/push_swap.h"
+
+void	ft_error(void)
+{
+	write(2, "Error\n", 6);
+	exit(1);
+}
+
+int	is_valid_number(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str || !str[i])
+		return (0);
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	is_sorted(int *stack, int size)
+{
+	int	i;
+
+	i = 0;
+	if (size <= 1)
+		return (1);
+	while (i < size - 1)
+	{
+		if (stack[i] > stack[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	max_bit_digit(int *stack, int *size)
+{
+	int	max;
+	int	bit_count;
+	int	i;
+
+	simplify_to_index(stack, *size);
+	i = 1;
+	if (size <= 0)
+		return (0);
+	max = stack[0];
+	while (i < *size)
+	{
+		if (stack[i] > max)
+			max = stack[i];
+		i++;
+	}
+	bit_count = 0;
+	while (max != 0)
+	{
+		max >>= 1;
+		bit_count++;
+	}
+	bit_count++;
+	return (bit_count);
+}
+
+int	arr_min(int *stack, int size)
+{
+	int	i;
+	int	min;
+
+	i = 1;
+	if (size <= 0)
+		return (0);
+	min = stack[0];
+	while (stack[i])
+	{
+		if (min > stack[i])
+			min = stack[i];
+		i++;
+	}
+	return (min);
+}

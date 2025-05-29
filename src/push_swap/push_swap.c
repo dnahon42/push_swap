@@ -6,7 +6,7 @@
 /*   By: dnahon <dnahon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 12:55:52 by dnahon            #+#    #+#             */
-/*   Updated: 2025/05/16 16:30:56 by dnahon           ###   ########.fr       */
+/*   Updated: 2025/05/29 17:01:49 by dnahon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,47 +14,57 @@
 #include "../../includes/libft.h"
 #include "../../includes/push_swap.h"
 
-void	ft_swap_adjacent(t_list **head)
+void	simplify_to_index(int *arr, int size)
 {
-	t_list	*first;
-	t_list	*second;
+	int	*new_arr;
+	int	i;
+	int	j;
+	int	k;
 
-	if (!head || !*head || !(*head)->next)
+	i = -1;
+	if (size <= 0)
 		return ;
-	first = *head;
-	second = first->next;
-	first->next = second->next;
-	second->next = first;
-	*head = second;
-}
-
-/* Print the linked list (assuming int content) */
-void	ft_print_list(t_list *head)
-{
-	while (head)
+	new_arr = (int *)ft_malloc(size * sizeof(int));
+	if (!new_arr)
+		ft_error();
+	while (++i < size)
 	{
-		ft_printf("%d -> ", *(int *)(head->content));
-		head = head->next;
+		k = 0;
+		j = -1;
+		while (++j < size)
+			if (arr[i] > arr[j])
+				k++;
+		new_arr[i] = k;
 	}
-	ft_printf("NULL\n");
+	i = -1;
+	while (++i < size)
+		arr[i] = new_arr[i];
+	ft_free(new_arr);
 }
 
-/* Main function */
-int	main(void)
+int	main(int argc, char *argv[])
 {
-	t_list	*head;
+	int	*a;
+	int	*b;
+	int	sa;
+	int	sb;
 
-	int a, b, c, d, e;
-	a = 1, b = 2, c = 3, d = 4, e = 5;
-	head = ft_lstnew(&a);
-	head->next = ft_lstnew(&b);
-	head->next->next = ft_lstnew(&c);
-	head->next->next->next = ft_lstnew(&d);
-	head->next->next->next->next = ft_lstnew(&e);
-	printf("Original list:\n");
-	ft_print_list(head);
-	ft_swap_adjacent(&head);
-	printf("\nList after swapping 2 and 4:\n");
-	ft_print_list(head);
-	return (0);
+	a = NULL;
+	b = NULL;
+	sb = 0;
+	if (argc < 2)
+		return (0);
+	sa = parse_arguments(argc, argv, &a);
+	if (sa <= 0)
+		return (ft_free(a), 1);
+	b = (int *)ft_malloc(sa * sizeof(int));
+	if (!b)
+		return (ft_free(a), 1);
+	if (is_sorted(a, sa))
+		return (ft_free(a), ft_free(b), 0);
+	if (sa >= 2 && sa <= 5)
+		sort_small(a, b, &sa, &sb);
+	else if (sa > 5)
+		radix_sort(a, b, &sa, &sb);
+	return (ft_free(a), ft_free(b), 0);
 }

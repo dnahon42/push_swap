@@ -6,7 +6,7 @@
 #    By: dnahon <dnahon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/15 14:05:47 by dnahon            #+#    #+#              #
-#    Updated: 2025/05/16 12:45:39 by dnahon           ###   ########.fr        #
+#    Updated: 2025/05/29 14:45:32 by dnahon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,10 @@ CFLAGS 		= -Wall -Wextra -Werror
 AR 			= ar rcs
 RM 			= rm -f
 SRC_DIR 	= ./src/libft ./src/push_swap
-SRC 		= ./src/push_swap/push_swap.c \
+SRC 		= ./src/push_swap/push_swap.c ./src/push_swap/push_swap_utils.c \
+			./src/push_swap/parse.c ./src/push_swap/instructions.c \
+			./src/push_swap/instructions2.c ./src/push_swap/sort.c \
+			./src/push_swap/radix.c ./src/push_swap/push_swap_utils2.c\
 			./src/libft/alloc/ft_calloc.c ./src/libft/alloc/ft_free.c \
 			./src/libft/alloc/ft_malloc.c ./src/libft/alloc/ft_realloc.c \
 			./src/libft/array/ft_intcpy.c ./src/libft/array/ft_intdup.c \
