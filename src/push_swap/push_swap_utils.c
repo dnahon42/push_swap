@@ -6,7 +6,7 @@
 /*   By: dnahon <dnahon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:52:56 by dnahon            #+#    #+#             */
-/*   Updated: 2025/05/29 13:32:20 by dnahon           ###   ########.fr       */
+/*   Updated: 2025/05/29 17:55:55 by dnahon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,28 +57,21 @@ int	is_sorted(int *stack, int size)
 int	max_bit_digit(int *stack, int *size)
 {
 	int	max;
-	int	bit_count;
+	int	bits;
 	int	i;
 
-	simplify_to_index(stack, *size);
-	i = 1;
-	if (size <= 0)
-		return (0);
 	max = stack[0];
+	i = 1;
 	while (i < *size)
 	{
 		if (stack[i] > max)
 			max = stack[i];
 		i++;
 	}
-	bit_count = 0;
-	while (max != 0)
-	{
-		max >>= 1;
-		bit_count++;
-	}
-	bit_count++;
-	return (bit_count);
+	bits = 0;
+	while ((max >> bits) != 0)
+		bits++;
+	return (bits);
 }
 
 int	arr_min(int *stack, int size)

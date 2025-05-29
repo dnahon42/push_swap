@@ -6,33 +6,13 @@
 /*   By: dnahon <dnahon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 12:38:20 by dnahon            #+#    #+#             */
-/*   Updated: 2025/05/29 12:59:49 by dnahon           ###   ########.fr       */
+/*   Updated: 2025/05/29 18:03:19 by dnahon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ft_printf.h"
 #include "../../includes/libft.h"
 #include "../../includes/push_swap.h"
-
-int	find_min_position(int *a, int sa)
-{
-	int	min_pos;
-	int	min_value;
-	int	i;
-
-	i = 1;
-	min_pos = 0;
-	min_value = a[0];
-	while (i++ < sa)
-	{
-		if (a[i] < min_value)
-		{
-			min_value = a[i];
-			min_pos = i;
-		}
-	}
-	return (min_pos);
-}
 
 void	sort_three(int *a, int sa)
 {

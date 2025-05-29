@@ -6,7 +6,7 @@
 /*   By: dnahon <dnahon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 18:13:38 by dnahon            #+#    #+#             */
-/*   Updated: 2025/05/29 15:03:48 by dnahon           ###   ########.fr       */
+/*   Updated: 2025/05/29 17:56:48 by dnahon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	radix_sort(int *a, int *b, int *sa, int *sb)
 	int	size_a;
 
 	bit = 0;
+	simplify_to_index(a, *sa);
 	digits = max_bit_digit(a, sa);
 	while (bit < digits)
 	{
