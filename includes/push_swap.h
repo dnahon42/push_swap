@@ -30,7 +30,7 @@ int		parse_split_arguments(char *arg, int **stack_a);
 int		parse_direct_arguments(int argc, char **argv, int **stack_a);
 int		parse_arguments(int argc, char **argv, int **stack_a);
 int		checkdup_onearg(int argc, char **argv, int **a);
-int		check_duplicates(int argc, char **argv);
+int		check_duplicates(int size, char **array);
 
 // Sorting
 
