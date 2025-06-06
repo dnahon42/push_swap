@@ -6,7 +6,7 @@
 /*   By: dnahon <dnahon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 20:30:28 by dnahon            #+#    #+#             */
-/*   Updated: 2025/05/29 16:28:04 by dnahon           ###   ########.fr       */
+/*   Updated: 2025/06/06 14:19:49 by dnahon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,18 @@ int	parse_split_arguments(char *arg, int **a)
 	int		count;
 	int		i;
 
-	i = 0;
 	splitted = ft_split(arg, ' ');
 	if (!splitted)
 		return (-1);
 	count = 0;
 	while (splitted[count])
 		count++;
+	if (count == 0)
+		return (ft_free_split(splitted), ft_error(), -1);
 	*a = ft_malloc(count * sizeof(int));
 	if (!*a)
 		return (ft_free_split(splitted), ft_error(), -1);
+	i = 0;
 	while (i < count)
 	{
 		if (!is_valid_number(splitted[i]))
@@ -37,8 +39,7 @@ int	parse_split_arguments(char *arg, int **a)
 		(*a)[i] = ft_atoi(splitted[i]);
 		i++;
 	}
-	ft_free_split(splitted);
-	return (count);
+	return (ft_free_split(splitted), count);
 }
 
 int	parse_direct_arguments(int argc, char **argv, int **a)
@@ -88,8 +89,8 @@ int	checkdup_onearg(int argc, char **argv, int **a)
 	int		size;
 	int		i;
 
-	if (argc != 2)
-		return (0);
+	if (argc != 2 || !argv[1] || !*argv[1])
+		return (ft_error(), -1);
 	splitted = ft_split(argv[1], ' ');
 	if (!splitted)
 		return (-1);
@@ -101,8 +102,8 @@ int	checkdup_onearg(int argc, char **argv, int **a)
 		i++;
 	}
 	size = i;
-	if (check_duplicates(size, splitted) == -1)
-		return (free_all(splitted, size - 1), 0);
+	if (size == 0 || check_duplicates(size, splitted) == -1)
+		return (free_all(splitted, size - 1), ft_error(), -1);
 	free_all(splitted, size - 1);
 	return (parse_split_arguments(argv[1], a));
 }

@@ -6,7 +6,7 @@
 /*   By: dnahon <dnahon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 13:10:17 by dnahon            #+#    #+#             */
-/*   Updated: 2025/05/29 18:11:53 by dnahon           ###   ########.fr       */
+/*   Updated: 2025/05/29 18:30:21 by dnahon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int		parse_direct_arguments(int argc, char **argv, int **stack_a);
 int		parse_arguments(int argc, char **argv, int **stack_a);
 int		checkdup_onearg(int argc, char **argv, int **a);
 int		check_duplicates(int size, char **array);
-
 // Sorting
 
 void	radix_sort(int *a, int *b, int *sa, int *sb);

@@ -6,13 +6,13 @@
 #    By: dnahon <dnahon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/15 14:05:47 by dnahon            #+#    #+#              #
-#    Updated: 2025/05/29 14:45:32 by dnahon           ###   ########.fr        #
+#    Updated: 2025/06/06 12:17:55 by dnahon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= push_swap
 CC 			= cc
-CFLAGS 		= -Wall -Wextra -Werror
+CFLAGS 		= -g3 -Wall -Wextra -Werror
 AR 			= ar rcs
 RM 			= rm -f
 SRC_DIR 	= ./src/libft ./src/push_swap
