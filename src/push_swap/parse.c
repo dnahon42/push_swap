@@ -6,7 +6,7 @@
 /*   By: dnahon <dnahon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 20:30:28 by dnahon            #+#    #+#             */
-/*   Updated: 2025/06/06 14:19:49 by dnahon           ###   ########.fr       */
+/*   Updated: 2025/06/10 14:24:56 by dnahon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ int	checkdup_onearg(int argc, char **argv, int **a)
 	i = 0;
 	while (splitted[i])
 	{
+		if (!is_valid_number(splitted[i]) || splitted[i][0] == '\0')
+			return (free_all(splitted, i), ft_error(), -1);
 		if (ft_atoll(splitted[i]) > INT_MAX || ft_atoll(splitted[i]) < INT_MIN)
 			return (free_all(splitted, i), ft_error(), -1);
 		i++;
@@ -113,8 +115,8 @@ int	parse_arguments(int argc, char **argv, int **a)
 	if (argc < 2)
 		return (0);
 	if (argc == 2)
-		return (checkdup_onearg(argc, argv, a));
+		return (checkdup_onearg(argc - 1, argv, a));
 	else
-		return (check_duplicates(argc, argv), parse_direct_arguments(argc, argv,
-				a));
+		return (check_duplicates(argc - 1, &argv[1]),
+			parse_direct_arguments(argc, argv, a));
 }
