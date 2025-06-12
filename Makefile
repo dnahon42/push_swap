@@ -6,7 +6,7 @@
 #    By: dnahon <dnahon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/15 14:05:47 by dnahon            #+#    #+#              #
-#    Updated: 2025/06/06 12:17:55 by dnahon           ###   ########.fr        #
+#    Updated: 2025/06/12 12:37:25 by dnahon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,51 +20,8 @@ SRC 		= ./src/push_swap/push_swap.c ./src/push_swap/push_swap_utils.c \
 			./src/push_swap/parse.c ./src/push_swap/instructions.c \
 			./src/push_swap/instructions2.c ./src/push_swap/sort.c \
 			./src/push_swap/radix.c ./src/push_swap/push_swap_utils2.c\
-			./src/libft/alloc/ft_calloc.c ./src/libft/alloc/ft_free.c \
-			./src/libft/alloc/ft_malloc.c ./src/libft/alloc/ft_realloc.c \
-			./src/libft/array/ft_intcpy.c ./src/libft/array/ft_intdup.c \
-			./src/libft/array/ft_intsort.c ./src/libft/checks/ft_isalnum.c \
-			./src/libft/checks/ft_isalpha.c ./src/libft/checks/ft_isascii.c \
-			./src/libft/checks/ft_isblank.c ./src/libft/checks/ft_iscntrl.c \
-			./src/libft/checks/ft_isdigit.c ./src/libft/checks/ft_isgraph.c \
-			./src/libft/checks/ft_islower.c ./src/libft/checks/ft_isprint.c \
-			./src/libft/checks/ft_ispunct.c ./src/libft/checks/ft_isspace.c \
-			./src/libft/checks/ft_isupper.c ./src/libft/checks/ft_isxdigit.c \
-			./src/libft/convert/ft_atoi_strict.c ./src/libft/convert/ft_atoi.c \
-			./src/libft/convert/ft_atol_strict.c ./src/libft/convert/ft_atol.c \
-			./src/libft/convert/ft_atoll_strict.c ./src/libft/convert/ft_atoll.c \
-			./src/libft/convert/ft_tolower.c ./src/libft/convert/ft_toupper.c \
-			./src/libft/io/ft_putchar_fd.c ./src/libft/io/ft_putchar.c \
-			./src/libft/io/ft_putend_fd.c ./src/libft/io/ft_putnbr_fd.c \
-			./src/libft/io/ft_putnbr.c ./src/libft/io/ft_putstr_fd.c \
-			./src/libft/io/ft_putstr.c ./src/libft/math/ft_abs.c \
-			./src/libft/math/ft_intlen.c ./src/libft/math/ft_max.c \
-			./src/libft/math/ft_min.c ./src/libft/math/ft_nmax.c \
-			./src/libft/math/ft_nmin.c ./src/libft/mem/ft_bzero.c \
-			./src/libft/mem/ft_memccpy.c ./src/libft/mem/ft_memchr.c \
-			./src/libft/mem/ft_memcmp.c ./src/libft/mem/ft_memcpy.c \
-			./src/libft/mem/ft_memmove.c ./src/libft/mem/ft_memset.c \
-			./src/libft/str/compare/ft_is_palindrome.c ./src/libft/str/compare/ft_strcmp.c \
-			./src/libft/str/compare/ft_strncmp.c ./src/libft/str/concat/ft_strcat.c \
-			./src/libft/str/concat/ft_strlcat.c ./src/libft/str/concat/ft_strncat.c \
-			./src/libft/str/copy/ft_strcpy.c ./src/libft/str/copy/ft_strdup.c \
-			./src/libft/str/copy/ft_strlcpy.c ./src/libft/str/info/ft_strlen.c \
-			./src/libft/str/info/ft_strnlen.c ./src/libft/str/modify/ft_strrev.c \
-			./src/libft/str/modify/ft_strjoin.c ./src/libft/str/modify/ft_substr.c \
-			./src/libft/str/modify/ft_strtrim.c ./src/libft/str/search/ft_strchr.c \
-			./src/libft/str/search/ft_strchrnul.c ./src/libft/str/search/ft_strnstr.c \
-			./src/libft/str/search/ft_strrchr.c ./src/libft/str/search/ft_strstr.c \
-			./src/libft/convert/ft_itoa.c ./src/libft/str/modify/ft_split.c \
-			./src/libft/str/modify/ft_strmapi.c ./src/libft/str/modify/ft_striteri.c \
-			./src/libft/linked_list/ft_lstnew.c ./src/libft/linked_list/ft_lstadd_front.c \
-			./src/libft/linked_list/ft_lstsize.c ./src/libft/linked_list/ft_lstlast.c \
-			./src/libft/linked_list/ft_lstadd_back.c ./src/libft/linked_list/ft_lstdelone.c \
-			./src/libft/linked_list/ft_lstclear.c ./src/libft/linked_list/ft_lstiter.c \
-			./src/libft/linked_list/ft_lstmap.c ./src/libft/printf/ft_printf_utils.c \
-			./src/libft/printf/ft_printf.c ./src/libft/printf/ft_printnbr.c \
-			./src/libft/printf/ft_printnbrui.c ./src/libft/printf/ft_printptr.c \
-			./src/libft/printf/ft_putnbr_base.c
 
+LIBFT 		= ./libft/libft.a
 INCLUDES	= ./includes/push_swap.h ./includes/libft.h ./includes/ft_printf.h
 
 OBJ = $(SRC:.c=.o)
@@ -82,7 +39,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@echo "$(GREEN)Building $(NC)$(NAME)"
-	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT)
 
 %.o: %.c
 	@echo "$(CYAN)Compiling $(NC)$<"

@@ -6,7 +6,7 @@
 /*   By: dnahon <dnahon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 20:30:28 by dnahon            #+#    #+#             */
-/*   Updated: 2025/06/10 14:24:56 by dnahon           ###   ########.fr       */
+/*   Updated: 2025/06/12 15:08:38 by dnahon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	checkdup_onearg(int argc, char **argv, int **a)
 	int		size;
 	int		i;
 
-	if (argc != 2 || !argv[1] || !*argv[1])
+	if (argc != 1 || !argv[1] || !*argv[1])
 		return (ft_error(), -1);
 	splitted = ft_split(argv[1], ' ');
 	if (!splitted)
