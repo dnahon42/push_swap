@@ -6,7 +6,7 @@
 /*   By: dnahon <dnahon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 20:30:28 by dnahon            #+#    #+#             */
-/*   Updated: 2025/06/12 15:08:38 by dnahon           ###   ########.fr       */
+/*   Updated: 2025/06/19 12:56:49 by dnahon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	parse_direct_arguments(int argc, char **argv, int **a)
 		if (!is_valid_number(argv[i]))
 			return (ft_free(*a), ft_error(), -1);
 		else if (ft_atoll(argv[i]) > INT_MAX || ft_atoll(argv[i]) < INT_MIN)
-			ft_error();
+			return (ft_free(*a), ft_error(), -1);
 		(*a)[sa++] = ft_atoi(argv[i++]);
 	}
 	return (sa);
@@ -88,21 +88,23 @@ int	checkdup_onearg(int argc, char **argv, int **a)
 	char	**splitted;
 	int		size;
 	int		i;
+	int		wrong;
 
 	if (argc != 1 || !argv[1] || !*argv[1])
 		return (ft_error(), -1);
 	splitted = ft_split(argv[1], ' ');
 	if (!splitted)
 		return (-1);
-	i = 0;
-	while (splitted[i])
+	i = -1;
+	while (splitted[++i])
 	{
-		if (!is_valid_number(splitted[i]) || splitted[i][0] == '\0')
-			return (free_all(splitted, i), ft_error(), -1);
-		if (ft_atoll(splitted[i]) > INT_MAX || ft_atoll(splitted[i]) < INT_MIN)
-			return (free_all(splitted, i), ft_error(), -1);
-		i++;
+		if ((!is_valid_number(splitted[i]) || splitted[i][0] == '\0')
+			|| (ft_atoll(splitted[i]) > INT_MAX
+				|| ft_atoll(splitted[i]) < INT_MIN))
+			wrong = 1;
 	}
+	if (wrong == 1)
+		return (free_all(splitted, i), ft_error(), -1);
 	size = i;
 	if (size == 0 || check_duplicates(size, splitted) == -1)
 		return (free_all(splitted, size - 1), ft_error(), -1);

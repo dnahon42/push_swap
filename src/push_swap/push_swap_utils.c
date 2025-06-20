@@ -6,7 +6,7 @@
 /*   By: dnahon <dnahon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:52:56 by dnahon            #+#    #+#             */
-/*   Updated: 2025/06/06 13:23:18 by dnahon           ###   ########.fr       */
+/*   Updated: 2025/06/16 14:22:29 by dnahon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	is_valid_number(char *str)
 	i = 0;
 	if (!str || !str[i])
 		return (0);
-	if (str[i] == '-' || str[i] == '+')
+	if ((str[i] == '-' && str[i + 1] >= '0' && str[i + 1] <= '9')
+		|| (str[i] == '+' && str[i + 1] >= '0' && str[i + 1] <= '9'))
 		i++;
 	while (str[i])
 	{
@@ -83,7 +84,7 @@ int	arr_min(int *stack, int size)
 	if (size <= 0)
 		return (0);
 	min = stack[0];
-	while (stack[i])
+	while (i < size)
 	{
 		if (min > stack[i])
 			min = stack[i];

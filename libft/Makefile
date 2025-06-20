@@ -6,7 +6,7 @@
 #    By: dnahon <dnahon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/06 17:04:07 by dnahon            #+#    #+#              #
-#    Updated: 2025/06/12 12:36:21 by dnahon           ###   ########.fr        #
+#    Updated: 2025/06/12 17:48:03 by dnahon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,7 @@ CFLAGS = -Wall -Wextra -Werror
 AR = ar rcs
 RM = rm -f
 SRC_DIR = ./src/libft
-SRC = ./src/libft/get_next_line/get_next_line.c \
-	./src/libft/get_next_line/get_next_line_utils.c \
-	./src/libft/alloc/ft_calloc.c ./src/libft/alloc/ft_free.c \
+SRC = ./src/libft/alloc/ft_calloc.c ./src/libft/alloc/ft_free.c \
 	./src/libft/alloc/ft_malloc.c ./src/libft/alloc/ft_realloc.c \
 	./src/libft/array/ft_intcpy.c ./src/libft/array/ft_intdup.c \
 	./src/libft/array/ft_intsort.c ./src/libft/checks/ft_isalnum.c \
